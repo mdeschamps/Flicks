@@ -7,17 +7,13 @@
 //
 
 import UIKit
-import SwiftLoader
 
 class MovieCollectionViewController: UIViewController {
 
   @IBOutlet weak var collectionView: UICollectionView!
 
-  var delegate: MovieTableDelegate?
-
   private var movies: [Movie]? {
     didSet {
-      SwiftLoader.hide()
       collectionView.hidden = false
       collectionView.reloadData()
     }
@@ -53,18 +49,6 @@ class MovieCollectionViewController: UIViewController {
   private func initUIElements() {
     collectionView.registerNib(UINib(nibName: "MovieCollectionCell", bundle: nil), forCellWithReuseIdentifier: "movieCollectionCell")
     collectionView.hidden = true
-
-    SwiftLoader.show(animated: true)
-  }
-
-  func showMoviesResponse(response: MoviesResponse) {
-    SwiftLoader.hide()
-    collectionView.hidden = false
-
-    if case let .Success(movies) = response {
-      self.movies = movies
-      collectionView.reloadData()
-    }
   }
 }
 
@@ -73,8 +57,6 @@ extension MovieCollectionViewController: MovieListCollection {
   func reloadMovies(movies: [Movie]) {
     self.movies = movies
   }
-
-  func errorLoadingMovies() { }
 }
 
 extension MovieCollectionViewController: UICollectionViewDataSource {

@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import SwiftLoader
 
 protocol MovieListCollection {
   func reloadMovies(movies: [Movie])
-  func errorLoadingMovies()
 }
 
 class MovieListViewController: UIViewController {
@@ -18,6 +18,7 @@ class MovieListViewController: UIViewController {
   @IBOutlet weak var tableContainerView: UIView!
   @IBOutlet weak var collectionContainerView: UIView!
   @IBOutlet weak var containerToggle: UISegmentedControl!
+  @IBOutlet weak var errorMessageLabel: UILabel?
 
   private var tableViewController: MovieTableViewController?
   private var collectionViewController: MovieCollectionViewController?
@@ -29,6 +30,9 @@ class MovieListViewController: UIViewController {
   var movies: [Movie]? {
     didSet {
       if let movies = self.movies {
+        SwiftLoader.hide()
+        hideErrorMessage()
+        
         visibleCollectionViewController?.reloadMovies(movies)
       }
     }
@@ -37,7 +41,15 @@ class MovieListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    loadMoviews()
+    var config: SwiftLoader.Config = SwiftLoader.Config()
+    config.size = 150
+    config.spinnerColor = .darkGrayColor()
+    config.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:0)
+    SwiftLoader.setConfig(config)
+
+    SwiftLoader.show(animated: true)
+
+    loadMovies()
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -48,14 +60,34 @@ class MovieListViewController: UIViewController {
       tableViewController = vc
 
     case let vc as MovieCollectionViewController:
-      vc.delegate = self
       collectionViewController = vc
 
     default: break
     }
   }
 
-  func loadMoviews() {  }
+  internal func loadMovies() {  }
+
+  internal func showErrorMessage() {
+    guard let errorMessageLabel = self.errorMessageLabel else {
+      return
+    }
+
+    SwiftLoader.hide()
+
+    let frame = errorMessageLabel.frame
+    errorMessageLabel.frame.origin.y = -errorMessageLabel.frame.height
+
+    errorMessageLabel.hidden = false
+
+    UIView.animateWithDuration(0.6) {
+      errorMessageLabel.frame = frame
+    }
+  }
+
+  internal func hideErrorMessage(){
+    errorMessageLabel?.hidden = true
+  }
 
   @IBAction func didTapToggle(sender: AnyObject) {
     if let movies = self.movies {
@@ -83,8 +115,9 @@ class MovieListViewController: UIViewController {
   }
 }
 
-extension MovieListViewController: MovieTableDelegate {
-  func reloadMovies() {
-    loadMoviews()
+extension MovieListViewController: MovieCollectionDelegate {
+  func refreshMovieList() {
+    hideErrorMessage()
+    loadMovies()
   }
 }

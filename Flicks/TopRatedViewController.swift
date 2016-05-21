@@ -10,7 +10,7 @@ import UIKit
 
 class TopRatedViewController: MovieListViewController {
 
-  override func loadMoviews() {
+  override func loadMovies() {
     let apiClient = MoviesDatabaseAPIClient()
 
     apiClient.fetchMovies(.TopRated) { [weak self] response in
@@ -19,7 +19,7 @@ class TopRatedViewController: MovieListViewController {
         self?.movies = movies
 
       case .Error(_):
-        self?.visibleCollectionViewController?.errorLoadingMovies()
+        self?.showErrorMessage()
       }
     }
   }

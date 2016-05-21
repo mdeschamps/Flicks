@@ -7,28 +7,23 @@
 //
 
 import UIKit
-import SwiftLoader
 
-protocol MovieTableDelegate {
-  func reloadMovies()
+protocol MovieCollectionDelegate {
+  func refreshMovieList()
 }
 
 class MovieTableViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var errorMessageLabel: UILabel?
   @IBOutlet weak var searchBar: UISearchBar?
 
-  var delegate: MovieTableDelegate?
+  internal var delegate: MovieCollectionDelegate?
 
   private var movies: [Movie]? {
     didSet {
       refreshControl?.endRefreshing()
-
-      SwiftLoader.hide()
+      
       tableView.hidden = false
-
-      hideErrorMessage()
       tableView.reloadData()
     }
   }
@@ -67,35 +62,12 @@ class MovieTableViewController: UIViewController {
   }
 
   private func initUIElements() {
-    tableView.registerNib(UINib(nibName: "MovieTableCell", bundle: nil), forCellReuseIdentifier: "movieCell")
-    tableView.hidden = true
-
-    var config: SwiftLoader.Config = SwiftLoader.Config()
-    config.size = 150
-    config.spinnerColor = .darkGrayColor()
-    config.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:0)
-    SwiftLoader.setConfig(config)
-
-    SwiftLoader.show(animated: true)
-
     refreshControl = UIRefreshControl()
     refreshControl!.addTarget(self, action: #selector(pulledToRefresh), forControlEvents: UIControlEvents.ValueChanged)
     tableView.insertSubview(refreshControl!, atIndex: 0)
-  }
-
-  func showErrorMessage() {
-    guard let errorMessageLabel = self.errorMessageLabel else {
-      return
-    }
-
-    let frame = errorMessageLabel.frame
-    errorMessageLabel.frame.origin.y = -errorMessageLabel.frame.height
-
-    errorMessageLabel.hidden = false
-
-    UIView.animateWithDuration(0.6) {
-      errorMessageLabel.frame = frame
-    }
+    
+    tableView.registerNib(UINib(nibName: "MovieTableCell", bundle: nil), forCellReuseIdentifier: "movieCell")
+    tableView.hidden = true
   }
 
   @objc private func pulledToRefresh(){
@@ -103,23 +75,13 @@ class MovieTableViewController: UIViewController {
       refreshControl?.endRefreshing()
       return
     }
-
-    hideErrorMessage()
-    delegate.reloadMovies()
-  }
-
-  private func hideErrorMessage(){
-    errorMessageLabel?.hidden = true
+    delegate.refreshMovieList()
   }
 }
 
 extension MovieTableViewController: MovieListCollection {
   func reloadMovies(movies: [Movie]) {
     self.movies = movies
-  }
-
-  func errorLoadingMovies() {
-    showErrorMessage()
   }
 }
 

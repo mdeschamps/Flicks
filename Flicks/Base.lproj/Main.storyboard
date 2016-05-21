@@ -32,16 +32,29 @@
                                     <segue destination="u0X-qj-5US" kind="embed" id="5Ns-qS-Ng5"/>
                                 </connections>
                             </containerView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There was an error, try again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7O-tx-sbm">
+                                <rect key="frame" x="0.0" y="64" width="600" height="41"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40.5" id="cqe-ai-GL0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="B7O-tx-sbm" firstAttribute="leading" secondItem="Y9Z-TN-qyE" secondAttribute="leading" id="DHE-lw-aC7"/>
                             <constraint firstItem="Y9Z-TN-qyE" firstAttribute="leading" secondItem="I3i-Ov-RMv" secondAttribute="leadingMargin" id="FpZ-uf-NRx"/>
                             <constraint firstItem="Et8-Nb-5di" firstAttribute="bottom" secondItem="OVk-PR-Xp6" secondAttribute="top" id="Itb-SO-yUw"/>
                             <constraint firstItem="OVk-PR-Xp6" firstAttribute="top" secondItem="Y9Z-TN-qyE" secondAttribute="bottom" id="J1u-dj-gaZ"/>
+                            <constraint firstItem="B7O-tx-sbm" firstAttribute="top" secondItem="Y9Z-TN-qyE" secondAttribute="top" id="SZg-Qj-NXu"/>
                             <constraint firstItem="Et8-Nb-5di" firstAttribute="top" secondItem="bUi-nd-gPU" secondAttribute="bottom" id="Tq2-U8-N77"/>
                             <constraint firstItem="Y9Z-TN-qyE" firstAttribute="leading" secondItem="Et8-Nb-5di" secondAttribute="leading" id="Y9l-O4-nIi"/>
                             <constraint firstItem="Y9Z-TN-qyE" firstAttribute="top" secondItem="bUi-nd-gPU" secondAttribute="bottom" id="ddx-Vz-G8X"/>
                             <constraint firstAttribute="trailing" secondItem="Et8-Nb-5di" secondAttribute="trailing" id="dzo-TR-WJT"/>
+                            <constraint firstItem="B7O-tx-sbm" firstAttribute="trailing" secondItem="Et8-Nb-5di" secondAttribute="trailing" id="fzT-pP-Owq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Y9Z-TN-qyE" secondAttribute="trailing" id="rmS-yJ-ZKk"/>
                             <constraint firstItem="Y9Z-TN-qyE" firstAttribute="trailing" secondItem="Et8-Nb-5di" secondAttribute="trailing" id="to3-qU-w9K"/>
                             <constraint firstItem="Et8-Nb-5di" firstAttribute="leading" secondItem="I3i-Ov-RMv" secondAttribute="leading" id="uFb-tN-Zwy"/>
@@ -72,6 +85,7 @@
                     <connections>
                         <outlet property="collectionContainerView" destination="Y9Z-TN-qyE" id="vhH-ZR-NhA"/>
                         <outlet property="containerToggle" destination="EiF-7J-EXb" id="nn3-jS-74m"/>
+                        <outlet property="errorMessageLabel" destination="B7O-tx-sbm" id="OU3-Ik-hPu"/>
                         <outlet property="tableContainerView" destination="Et8-Nb-5di" id="J7q-nu-5o5"/>
                     </connections>
                 </viewController>
@@ -120,24 +134,11 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There was an error, try again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idu-CU-zLF">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="41"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40.5" id="ryO-Dg-f3S"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="idu-CU-zLF" firstAttribute="trailing" secondItem="l2L-6L-3Fr" secondAttribute="trailing" id="12x-7A-Jyo"/>
-                                    <constraint firstItem="idu-CU-zLF" firstAttribute="leading" secondItem="l2L-6L-3Fr" secondAttribute="leading" id="H1C-fT-BLA"/>
                                     <constraint firstAttribute="bottom" secondItem="l2L-6L-3Fr" secondAttribute="bottom" id="OnH-au-Z2Q"/>
                                     <constraint firstItem="l2L-6L-3Fr" firstAttribute="top" secondItem="9Dm-zc-x1q" secondAttribute="top" id="UGt-QG-bp7"/>
-                                    <constraint firstItem="idu-CU-zLF" firstAttribute="top" secondItem="l2L-6L-3Fr" secondAttribute="top" id="f1g-g6-fcA"/>
                                     <constraint firstAttribute="trailing" secondItem="l2L-6L-3Fr" secondAttribute="trailing" id="r6q-Jc-wvP"/>
                                     <constraint firstItem="l2L-6L-3Fr" firstAttribute="leading" secondItem="9Dm-zc-x1q" secondAttribute="leading" id="znU-AX-2AY"/>
                                 </constraints>
@@ -162,7 +163,6 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="errorMessageLabel" destination="idu-CU-zLF" id="yG3-vV-3eN"/>
                         <outlet property="searchBar" destination="4sp-Vx-QfW" id="OgC-ip-gVT"/>
                         <outlet property="tableView" destination="l2L-6L-3Fr" id="0qr-cF-9aU"/>
                     </connections>
@@ -437,6 +437,16 @@
                                     <segue destination="u0X-qj-5US" kind="embed" id="i0F-Y9-Jzt"/>
                                 </connections>
                             </containerView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There was an error, try again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idu-CU-zLF">
+                                <rect key="frame" x="0.0" y="64" width="600" height="41"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40.5" id="ryO-Dg-f3S"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -447,6 +457,9 @@
                             <constraint firstItem="3jo-Ld-XK3" firstAttribute="bottom" secondItem="bFh-5G-4ga" secondAttribute="top" id="K8n-XI-OQ9"/>
                             <constraint firstItem="3jo-Ld-XK3" firstAttribute="leading" secondItem="pAs-XF-s2y" secondAttribute="leading" id="Kcw-Ye-gKd"/>
                             <constraint firstItem="UUO-q5-4CB" firstAttribute="trailing" secondItem="3jo-Ld-XK3" secondAttribute="trailing" id="QDN-6T-pKS"/>
+                            <constraint firstItem="idu-CU-zLF" firstAttribute="top" secondItem="3jo-Ld-XK3" secondAttribute="top" id="QIq-2Z-2qo"/>
+                            <constraint firstItem="idu-CU-zLF" firstAttribute="trailing" secondItem="UUO-q5-4CB" secondAttribute="trailing" id="WyU-La-Mu0"/>
+                            <constraint firstItem="idu-CU-zLF" firstAttribute="leading" secondItem="3jo-Ld-XK3" secondAttribute="leading" id="ifS-V9-QZ4"/>
                             <constraint firstItem="UUO-q5-4CB" firstAttribute="leading" secondItem="3jo-Ld-XK3" secondAttribute="leading" id="kcC-zG-PAo"/>
                             <constraint firstItem="3jo-Ld-XK3" firstAttribute="top" secondItem="mhR-ET-WJj" secondAttribute="bottom" id="mxN-fx-g5j"/>
                             <constraint firstItem="UUO-q5-4CB" firstAttribute="top" secondItem="3jo-Ld-XK3" secondAttribute="top" id="nfj-ZQ-OKd"/>
@@ -477,6 +490,7 @@
                     <connections>
                         <outlet property="collectionContainerView" destination="UUO-q5-4CB" id="2dp-tM-XFB"/>
                         <outlet property="containerToggle" destination="Xhr-Ig-aHp" id="0ga-Oq-jmb"/>
+                        <outlet property="errorMessageLabel" destination="idu-CU-zLF" id="sOk-D0-RSF"/>
                         <outlet property="tableContainerView" destination="3jo-Ld-XK3" id="vUZ-32-X8L"/>
                     </connections>
                 </viewController>
